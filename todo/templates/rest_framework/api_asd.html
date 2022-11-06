@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+fetch('http://192.168.2.172:8000/api')
+
+  .then(data => data.json())
+  .then(data => {
+  for(let i of data){
+  document.getElementsByTagName("h1") = i.Comment;
+  }
+  console.log(data,typeof data)
+  })
+  .catch(e => {
+    console.log(e);
+    return e;
+  });
+</script>
+
+<h1>My First Heading</h1>
+
+<p>My first paragraph.</p>
+<p class="demo">Fetch a file to change this text.asdfasdf</p>
+
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script async
+    src="https://maps.googleapis.com/maps/api/js?&libraries=places&callback=initMap">
+</script>
+  <script>
+var geocoder;
+  var map;
+  function initialize() {
+    geocoder = new google.maps.Geocoder();
+    console.log(geocoder.geocode)
+    var latlng = new google.maps.LatLng(40.2215062,44.4281003);
+
+    var mapOptions = {
+      zoom: 10,
+      center: latlng
+    }
+
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    console.log(map)
+  }
+
+  function codeAddress() {
+    var address = document.getElementById('address').value;
+    geocoder.geocode( { 'address': address}, function(results, status) {
+
+      if (status == 'OK') {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+  </script>
+</head>
+<body onload="initialize()">
+ <div id="map" style="width: 320px; height: 480px;"></div>
+  <div>
+    <input id="address" type="textbox" value="Sydney, NSW">
+    <input type="submit" value="Encode" onclick="codeAddress()">
+  </div>
+</body>
+</html>
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<body>-->
+<!--<script>-->
+<!--fetch('https://www.google.com/maps/place/Davtashen,+Yerevan', { mode: 'no-cors'})-->
+<!--.then(data => data.json())-->
+<!--  .then(data => {-->
+
+<!--  console.log(data,typeof data)-->
+<!--  })-->
+<!--  .catch(e => {-->
+<!--    console.log(e);-->
+<!--    return e;-->
+<!--  });-->
+<!--</script>-->
+<!--<h1>My First Heading</h1>-->
+<!--<p>My first paragraph.</p>-->
+
+<!--</body>-->
+<!--</html>-->
